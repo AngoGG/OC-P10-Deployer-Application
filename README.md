@@ -1,19 +1,35 @@
-# OpenClassrooms Projet 11: Améliorez un projet existant en python
+OpenClassrooms Projet 8: Créez une plateforme pour amateurs de Nutella
 
-Ce répertoire contiendra les développemments du projet 11. L'objectif de ce projet est d'améliorer un projet existant, qui consistera ici à ajouter 2 fonctionnalités au projet 8.
+Ce répertoire contiendra les développents du projet 8. L'objectif du projet est de développer pour la société Pub Beurre une plateforme web à destination de ses clients selon un cahier des charges.
+Fonctionnalités Attendues
 
-## Fonctionnalités à ajouter
+    Développement avec le Framework Web Django
+    Récupération des données sur l’API Open Food Facts
+    Affichage du champ de recherche dès la page d’accueil
+    Authentification de l’utilisateur par son adresse mail
+    Base de données PostgreSQL
+    Déploiement sur Heroku
+    Ecriture de tests
 
-3 fonctionnalités vont être ajoutées suite à une demande client:
+Structure du projet Django
 
-- Possibilité de changer le mot de passe utilisateur
-- Possibilité de réinitialiser le mot de passe d'un utilisateur
-- Possibilité de choisir les catégories à importer depuis l'API Open Food Facts
+Le projet Django pubbeurre contient 5 applications, permettant de remplir les fonctionnalités attendues par le client:
 
-## Evolution de fonctionnalité
+    openfoodfacts: Récupération et intégrations en base des données de l’API Open Food Facts. Ne contient qu'une custom command lancant les traitements.
+    app: Application centralisant les éléments globaux du projet (CSS, fichiers statiques, templates généraux et javascript)
+    product: Gestion de la recherche et de l’affichage des produits.
+    substitute: Gestion et affichage des produits de substitution favoris d’un utilisateur.
+    user: Gestion et affichage de la création et de la connexion des utilisateurs.
 
-La commande de récupération et d'insertion des produits en base de données va également être revue afin de ne plus être vidée entièrement à chaque nouvel import et de pouvoir permettre une mise à jour régulière de la base de données en production.
+Déploiement et utilisation du site en local
 
-## Correction de bug
+Nécessite Python 3.7 et pipenv d'installés sur le poste, effectuer les manipulations suivantes dans l'ordre:
 
-Un bug empêchant l'insertion de données en base a été remonté par le client. Le bug doit être corrigé et le test refactorisé afin de résoudre ce dernier.
+    Récupérer le projet Django depuis github.
+    Installer l'environnement virtuel pipenv install
+    Entrer dans l'environnement virtuel pipenv shell
+    Récupérer la structure de la base de données avec python manage.py migrate
+    Lancer la custom command fill_database, permettant de récupérer les données de l'API OpenFoodFacts python manage.py fill_database
+    Lancer le serveur python manage.py runserver
+
+Le projet est configuré de sorte à utiliser une base de données SQLite en local, PostgreSQL n'est mis en place et utilisé que sur le site en production.
