@@ -1,0 +1,20 @@
+language: python
+python:
+    - '3.8'
+
+before_script:
+    - pip install pipenv
+    - pipenv install
+
+branches:
+    only:
+        - staging
+
+env:
+    - DJANGO_SETTINGS_MODULE=purbeurre.settings.travis
+
+services:
+    - postgresql
+    
+script:
+    - pipenv run pytest
