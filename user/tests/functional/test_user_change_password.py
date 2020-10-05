@@ -3,6 +3,7 @@ from django.contrib.staticfiles.testing import StaticLiveServerTestCase
 from django.test import Client
 from selenium import webdriver
 from user.models import User
+import platform
 
 options = webdriver.ChromeOptions()
 options.add_argument("--headless")
@@ -11,9 +12,10 @@ options.add_argument("window-size=1920x1080")
 
 class ChromeUserPasswordChangeFunctionalTest(StaticLiveServerTestCase):
     def setUp(self):
-        self.browser: webdriver = webdriver.Chrome(
-            "user/tests/functional/chromedriver.exe", options=options
+        chromedriver = (
+            "tests/chromedriver.exe" if platform.system() == "Windows" else ""
         )
+        self.browser: webdriver = webdriver.Chrome(chromedriver, options=options)
         self.user: User = User.objects.create_user(
             email="test@mail.com",
             password="password8chars",
