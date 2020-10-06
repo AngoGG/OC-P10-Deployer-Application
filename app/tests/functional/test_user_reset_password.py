@@ -22,10 +22,12 @@ options.add_argument("--disable-gpu")
 
 class ChromeUserPasswordChangeFunctionalTest(StaticLiveServerTestCase):
     def setUp(self):
-        chromedriver = (
-            "tests/chromedriver.exe" if platform.system() == "Windows" else ""
-        )
-        self.browser: webdriver = webdriver.Chrome(chromedriver, options=options)
+        if platform.system() == "Windows":
+            self.browser: webdriver = webdriver.Chrome(
+                "tests/chromedriver.exe", options=options
+            )
+        else:
+            self.browser: webdriver = webdriver.Chrome(options=options)
         self.user: User = User.objects.create_user(
             email="test@mail.com",
             password="password8chars",
