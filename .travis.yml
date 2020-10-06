@@ -1,15 +1,17 @@
+dist: xenial
 language: python
 python:
     - '3.8'
 addons:
   chrome: stable
 install:
-    - wget -N https://chromedriver.storage.googleapis.com/86.0.4240.22/chromedriver_linux64.zip -P ~/
+    - wget -N https://chromedriver.storage.googleapis.com/85.0.4183.87/chromedriver_linux64.zip -P ~/
     - unzip ~/chromedriver_linux64.zip -d ~/
     - rm ~/chromedriver_linux64.zip
     - sudo mv -f ~/chromedriver /usr/local/share/
     - sudo chmod +x /usr/local/share/chromedriver
-    - sudo ln -s /usr/local/share/chromedriver /usr/local/bin/chromedriver
+    - sudo rm /usr/local/bin/chromedriver
+    - sudo ln -sv /usr/local/share/chromedriver /usr/local/bin/chromedriver
 before_script:
     - pip install pipenv
     - pipenv install
