@@ -10,7 +10,6 @@ install:
     - rm ~/chromedriver_linux64.zip
     - sudo mv -f ~/chromedriver /usr/local/share/
     - sudo chmod +x /usr/local/share/chromedriver
-    - sudo rm /usr/local/bin/chromedriver
     - sudo ln -sv /usr/local/share/chromedriver /usr/local/bin/chromedriver
 before_script:
     - pip install pipenv
